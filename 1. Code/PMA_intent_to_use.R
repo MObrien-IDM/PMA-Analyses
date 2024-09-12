@@ -52,14 +52,16 @@ wtd.table(x = pma$near_term_intent, weights = pma$FQweight)
 
 ##restrict to baseline for easier baseline tables and figures
 pma1 <- pma %>% filter(phase==1)
-
+##country-specific work
+cdi <- pma %>% filter(country=="Cotedivoire")
+cdi1 <- pma1 %>% filter(country=="Cotedivoire")
 wtd.table(x = pma1$near_term_intent, weights = pma1$FQweight)
 
 ## QUick visz
 
-int_prop <- as.data.frame(table(pma$country, pma$intent_x_use, pma$phase) %>% prop.table(margin=c(1,3)))
-ggplot(int_prop, aes(x = Var3, y=Freq, group=Var2, colour=Var2)) + 
-  geom_point() + geom_line() +
+int_prop <- as.data.frame(wtd.table(x = pma1$country, y = pma1$near_term_intent, weights = pma1$FQweight) %>% prop.table(margin=1))
+ggplot(int_prop, aes(x = Var2, y=Freq, group=Var2, colour=Var2)) + 
+  geom_point() +
   facet_wrap(~ Var1) + 
   xlab("Survey phase") + ylab("Proportion") + 
   theme(legend.title=element_blank())
