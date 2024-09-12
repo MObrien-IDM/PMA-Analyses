@@ -34,5 +34,23 @@ pma_cs$near_term_intent[pma_cs$FPUSPLAN == 98] <- "No response/missing"
 
 ## Weighted descriptives 
 library(questionr)
-wtd.table(x = pma_cs$near_term_intent, weights = pma_cs$FQweight)
+wtd.table(x = pma_cs$near_term_intent, weights = pma_cs$FQWEIGHT, useNA = "ifany")
+
+## country specific 
+bf <- pma_cs %>% filter(COUNTRY == 01)
+wtd.table(x = bf$near_term_intent, weights = bf$FQWEIGHT)%>% prop.table()
+drc <- pma_cs %>% filter(COUNTRY == 02)
+wtd.table(x = drc$near_term_intent, weights = drc$FQWEIGHT)%>% prop.table()
+eth <- pma_cs %>% filter(COUNTRY == 03)
+wtd.table(x = eth$near_term_intent, weights = eth$FQWEIGHT)%>% prop.table()
+ken <- pma_cs %>% filter(COUNTRY == 07)
+wtd.table(x = ken$near_term_intent, weights = ken$FQWEIGHT)%>% prop.table()
+ngr <- pma_cs %>% filter(COUNTRY == 08)
+wtd.table(x = ngr$near_term_intent, weights = ngr$FQWEIGHT)%>% prop.table()
+nga <- pma_cs %>% filter(COUNTRY == 09)
+wtd.table(x = nga$near_term_intent, weights = nga$FQWEIGHT)%>% prop.table()
+uga <- pma_cs %>% filter(COUNTRY == 10)
+wtd.table(x = uga$near_term_intent, weights = uga$FQWEIGHT) %>% prop.table()
+cdi <- pma_cs %>% filter(COUNTRY == 11)
+wtd.table(x = cdi$near_term_intent, weights = cdi$FQWEIGHT) %>% prop.table()
 
