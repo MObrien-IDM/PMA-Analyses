@@ -38,19 +38,42 @@ wtd.table(x = pma_cs$near_term_intent, weights = pma_cs$FQWEIGHT, useNA = "ifany
 
 ## country specific 
 bf <- pma_cs %>% filter(COUNTRY == 01)
-wtd.table(x = bf$near_term_intent, weights = bf$FQWEIGHT)%>% prop.table()
+bf_tab <- as.data.frame(wtd.table(x = bf$near_term_intent, weights = bf$FQWEIGHT)%>% prop.table())
+bf_tab$country <- "BF"
+
 drc <- pma_cs %>% filter(COUNTRY == 02)
-wtd.table(x = drc$near_term_intent, weights = drc$FQWEIGHT)%>% prop.table()
+drc_tab <- as.data.frame(wtd.table(x = drc$near_term_intent, weights = drc$FQWEIGHT)%>% prop.table())
+drc_tab$country <- "DRC"
+
 eth <- pma_cs %>% filter(COUNTRY == 03)
-wtd.table(x = eth$near_term_intent, weights = eth$FQWEIGHT)%>% prop.table()
+eth_tab <- as.data.frame(wtd.table(x = eth$near_term_intent, weights = eth$FQWEIGHT)%>% prop.table())
+eth_tab$country <- "ETH"
+
 ken <- pma_cs %>% filter(COUNTRY == 07)
-wtd.table(x = ken$near_term_intent, weights = ken$FQWEIGHT)%>% prop.table()
+ken_tab <- as.data.frame(wtd.table(x = ken$near_term_intent, weights = ken$FQWEIGHT)%>% prop.table())
+ken_tab$country <- "KEN"
+
 ngr <- pma_cs %>% filter(COUNTRY == 08)
-wtd.table(x = ngr$near_term_intent, weights = ngr$FQWEIGHT)%>% prop.table()
+ngr_tab <- as.data.frame(wtd.table(x = ngr$near_term_intent, weights = ngr$FQWEIGHT)%>% prop.table())
+ngr_tab$country <- "Niger"
+
 nga <- pma_cs %>% filter(COUNTRY == 09)
-wtd.table(x = nga$near_term_intent, weights = nga$FQWEIGHT)%>% prop.table()
+nga_tab <- as.data.frame(wtd.table(x = nga$near_term_intent, weights = nga$FQWEIGHT)%>% prop.table())
+nga_tab$country <- "Nigeria"
+
+
 uga <- pma_cs %>% filter(COUNTRY == 10)
-wtd.table(x = uga$near_term_intent, weights = uga$FQWEIGHT) %>% prop.table()
+uga_tab <- as.data.frame(wtd.table(x = uga$near_term_intent, weights = uga$FQWEIGHT) %>% prop.table())
+uga_tab$country <- "UGA"
+
 cdi <- pma_cs %>% filter(COUNTRY == 11)
-wtd.table(x = cdi$near_term_intent, weights = cdi$FQWEIGHT) %>% prop.table()
+cdi_tab <- as.data.frame(wtd.table(x = cdi$near_term_intent, weights = cdi$FQWEIGHT) %>% prop.table())
+cdi_tab$country <- "CDI"
+
+## bind all the prop tables together 
+int_prop <- rbind(bf_tab, drc_tab, eth_tab, ken_tab, ngr_tab, nga_tab, uga_tab, cdi_tab)
+names(int_prop) <- c("Intent", "Prop", "Country")
+
+nti <- int_prop %>% filter(Intent=="Near-term intent")
+fivenum(nti$Prop)
 
