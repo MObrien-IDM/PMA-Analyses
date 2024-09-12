@@ -77,3 +77,5 @@ names(int_prop) <- c("Intent", "Prop", "Country")
 nti <- int_prop %>% filter(Intent=="Near-term intent")
 fivenum(nti$Prop)
 
+write.csv(nti, file = "near-term intent PMA.csv")
+
