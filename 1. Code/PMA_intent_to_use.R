@@ -46,6 +46,8 @@ pma$near_term_intent[pma$fp_start == "3. Soon/now"] <- "Near-term intent"
 pma$near_term_intent[pma$fp_start == "4. After the birth of this child"] <- "Desire to use in future"
 pma$near_term_intent[pma$future_user_not_current == "0. No"] <- "No intent to use in future"
 pma$near_term_intent[pma$current_user == "1. Yes"] <- "Current user"
+pma$near_term_intent[pma$pregnant == "1. Yes"] <- "Pregnant"
+
 
 library(questionr)
 wtd.table(x = pma$near_term_intent, weights = pma$FQweight)
