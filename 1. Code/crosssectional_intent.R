@@ -79,3 +79,7 @@ fivenum(nti$Prop)
 
 write.csv(nti, file = "near-term intent PMA.csv")
 
+
+#projection to # WITU
+pop_WITU <- as.data.frame(wtd.table(x = pma_cs$COUNTRY, pma_cs$near_term_intent, weights = pma_cs$POPWT, useNA = "ifany"))
+write.csv(pop_WITU, file = "pop size WITU PMA.csv")
