@@ -9,7 +9,7 @@ require(svyweight)
 require(pollster)
 require(gdata)
 require(ipumsr)
-dir <- "C:/Users/michelleob/OneDrive - Bill & Melinda Gates Foundation/Documents/PMA/data/"
+dir <- "PMA/data/" ## replace with own dir for data
 setwd(dir)
 # NOTE: To load data, you must download both the extract's data and the DDI
 # and also set the working directory to the folder with these files (or change the path below).
