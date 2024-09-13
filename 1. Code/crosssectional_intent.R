@@ -83,3 +83,40 @@ write.csv(nti, file = "near-term intent PMA.csv")
 #projection to # WITU
 pop_WITU <- as.data.frame(wtd.table(x = pma_cs$COUNTRY, pma_cs$near_term_intent, weights = pma_cs$POPWT, useNA = "ifany"))
 write.csv(pop_WITU, file = "pop size WITU PMA.csv")
+
+## country specific 
+pop_bf <- pma_cs %>% filter(COUNTRY == 01 & YEAR == 2022)
+pop_bf_tab <- as.data.frame(wtd.table(x = pop_bf$near_term_intent, weights = pop_bf$POPWT))
+pop_bf_tab$country <- "Burkina Faso"
+
+pop_drc <- pma_cs %>% filter(COUNTRY == 02 & YEAR == 2021)
+pop_drc_tab <- as.data.frame(wtd.table(x = pop_drc$near_term_intent, weights = pop_drc$POPWT))
+pop_drc_tab$country <- "DRC"
+
+pop_eth <- pma_cs %>% filter(COUNTRY == 03 & YEAR == 2021)
+pop_eth_tab <- as.data.frame(wtd.table(x = pop_eth$near_term_intent, weights = pop_eth$POPWT))
+pop_eth_tab$country <- "Ethiopia"
+
+pop_ken <- pma_cs %>% filter(COUNTRY == 07 & YEAR == 2021)
+pop_ken_tab <- as.data.frame(wtd.table(x = pop_ken$near_term_intent, weights = pop_ken$POPWT))
+pop_ken_tab$country <- "Kenya"
+
+pop_ngr <- pma_cs %>% filter(COUNTRY == 08 & YEAR == 2023)
+pop_ngr_tab <- as.data.frame(wtd.table(x = pop_ngr$near_term_intent, weights = pop_ngr$POPWT))
+pop_ngr_tab$country <- "Niger"
+
+pop_nga <- pma_cs %>% filter(COUNTRY == 09 & YEAR == 2021)
+pop_nga_tab <- as.data.frame(wtd.table(x = pop_nga$near_term_intent, weights = pop_nga$POPWT))
+pop_nga_tab$country <- "Nigeria"
+
+
+pop_uga <- pma_cs %>% filter(COUNTRY == 10 & 2022)
+pop_uga_tab <- as.data.frame(wtd.table(x = pop_uga$near_term_intent, weights = pop_uga$POPWT))
+pop_uga_tab$country <- "Uganda"
+
+pop_cdi <- pma_cs %>% filter(COUNTRY == 11)
+pop_cdi_tab <- as.data.frame(wtd.table(x = pop_cdi$near_term_intent, weights = pop_cdi$POPWT))
+pop_cdi_tab$country <- "CDI"
+
+pop_all <- rbind(pop_bf_tab, pop_cdi_tab, pop_drc_tab, pop_eth_tab, pop_ken_tab, pop_ngr_tab, pop_nga_tab, pop_uga_tab)
+write.csv(pop_all, file = "pop_all_intent_PMA.csv")
